@@ -1,10 +1,14 @@
 package br.senai.sp.jandira.ui;
 
+import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import javax.swing.JTable;
+
 public class HomeFrame extends javax.swing.JFrame {
 
     public HomeFrame() {
-        System.out.println("Criando a tela home...");
         initComponents();
+        PlanoDeSaudeDAO.criarPlanosDeSaudeTeste();
+        criarTabelaPlanosDeSaude();
     }
 
     @SuppressWarnings("unchecked")
@@ -33,7 +37,7 @@ public class HomeFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(153, 0, 153));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -42,26 +46,26 @@ public class HomeFrame extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(90, 20, 740, 40);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/agenda.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/schedule.png"))); // NOI18N
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 10, 70, 60);
+        jLabel2.setBounds(10, 10, 70, 64);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 970, 80);
 
         buttonSair.setForeground(new java.awt.Color(51, 0, 255));
-        buttonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/exit32.png"))); // NOI18N
+        buttonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/exit_1.png"))); // NOI18N
         buttonSair.setToolTipText("Sair do sistema");
         getContentPane().add(buttonSair);
         buttonSair.setBounds(875, 100, 80, 60);
 
         buttonAgenda.setForeground(new java.awt.Color(51, 0, 255));
-        buttonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/agenda32.png"))); // NOI18N
+        buttonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/calendar_1.png"))); // NOI18N
         buttonAgenda.setToolTipText("Agenda");
         getContentPane().add(buttonAgenda);
         buttonAgenda.setBounds(10, 100, 80, 60);
 
-        buttonPlanosDeSaude.setBackground(new java.awt.Color(204, 102, 255));
+        buttonPlanosDeSaude.setBackground(new java.awt.Color(195, 161, 251));
         buttonPlanosDeSaude.setForeground(new java.awt.Color(51, 0, 255));
         buttonPlanosDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/health-card.png"))); // NOI18N
         buttonPlanosDeSaude.setToolTipText("Planos de saúde");
@@ -69,19 +73,19 @@ public class HomeFrame extends javax.swing.JFrame {
         buttonPlanosDeSaude.setBounds(370, 100, 80, 60);
 
         buttonEspecialidades.setForeground(new java.awt.Color(51, 0, 255));
-        buttonEspecialidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/especialidades32.png"))); // NOI18N
+        buttonEspecialidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/lista.png"))); // NOI18N
         buttonEspecialidades.setToolTipText("Especialidades");
         getContentPane().add(buttonEspecialidades);
         buttonEspecialidades.setBounds(280, 100, 80, 60);
 
         buttonPacientes.setForeground(new java.awt.Color(51, 0, 255));
-        buttonPacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/sick32.png"))); // NOI18N
+        buttonPacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/sick.png"))); // NOI18N
         buttonPacientes.setToolTipText("Pacientes");
         getContentPane().add(buttonPacientes);
         buttonPacientes.setBounds(100, 100, 80, 60);
 
         buttonMedicos.setForeground(new java.awt.Color(51, 0, 255));
-        buttonMedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/doctor32.png"))); // NOI18N
+        buttonMedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/medical-team_1.png"))); // NOI18N
         buttonMedicos.setToolTipText("Médicos");
         getContentPane().add(buttonMedicos);
         buttonMedicos.setBounds(190, 100, 80, 60);
@@ -90,7 +94,7 @@ public class HomeFrame extends javax.swing.JFrame {
         panelPlanosDeSaude.setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 0, 102));
+        jLabel3.setForeground(new java.awt.Color(195, 161, 251));
         jLabel3.setText("Planos de saúde");
         panelPlanosDeSaude.add(jLabel3);
         jLabel3.setBounds(20, 10, 180, 20);
@@ -111,7 +115,7 @@ public class HomeFrame extends javax.swing.JFrame {
         panelPlanosDeSaude.add(scrollTablePlanosDeSaude);
         scrollTablePlanosDeSaude.setBounds(20, 40, 905, 240);
 
-        buttonExcluirPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/delete32-2.png"))); // NOI18N
+        buttonExcluirPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/delete.png"))); // NOI18N
         buttonExcluirPlanoDeSaude.setToolTipText("Excluir plano de saúde selecionado");
         panelPlanosDeSaude.add(buttonExcluirPlanoDeSaude);
         buttonExcluirPlanoDeSaude.setBounds(700, 294, 70, 60);
@@ -121,7 +125,7 @@ public class HomeFrame extends javax.swing.JFrame {
         panelPlanosDeSaude.add(buttonAlterarPlanoDeSaude);
         buttonAlterarPlanoDeSaude.setBounds(780, 294, 70, 60);
 
-        buttonAdicionarPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/add32.png"))); // NOI18N
+        buttonAdicionarPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/menu.png"))); // NOI18N
         buttonAdicionarPlanoDeSaude.setToolTipText("Adicionar plano de saúde");
         panelPlanosDeSaude.add(buttonAdicionarPlanoDeSaude);
         buttonAdicionarPlanoDeSaude.setBounds(860, 294, 70, 60);
@@ -129,7 +133,7 @@ public class HomeFrame extends javax.swing.JFrame {
         getContentPane().add(panelPlanosDeSaude);
         panelPlanosDeSaude.setBounds(10, 180, 945, 370);
 
-        setBounds(0, 0, 983, 601);
+        setBounds(0, 0, 983, 610);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -150,4 +154,22 @@ public class HomeFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollTablePlanosDeSaude;
     private javax.swing.JTable tablePlanosDeSaude;
     // End of variables declaration//GEN-END:variables
+
+    private void criarTabelaPlanosDeSaude() {
+        tablePlanosDeSaude.setModel(PlanoDeSaudeDAO.getTableModel());
+        
+        //desativar o redimensionamento da JTable
+        
+        tablePlanosDeSaude.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
+        tablePlanosDeSaude.getColumnModel().getColumn(0).setPreferredWidth(102);
+        tablePlanosDeSaude.getColumnModel().getColumn(1).setPreferredWidth(400);
+        tablePlanosDeSaude.getColumnModel().getColumn(2).setPreferredWidth(400);
+        
+        //Impedir/bloquear a movimentação das colunas
+        tablePlanosDeSaude.getTableHeader().setReorderingAllowed(false);
+        
+        //bloquear edição das cedulas
+        tablePlanosDeSaude.setDefaultEditor(Object.class, null);
+    }
 }

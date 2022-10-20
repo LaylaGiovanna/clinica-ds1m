@@ -15,13 +15,12 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
             boolean modal,
             TipoOperacao tipoOperacao,
             PlanoDeSaude planoDeSaude) {
-        
+
         super(parent, modal);
         initComponents();
         this.tipoOperacao = tipoOperacao;
         this.planoDeSaude = planoDeSaude;
 
-        
         //Preencher os campos caso o tipo de operação for ALTERAR
         if (tipoOperacao == TipoOperacao.ALTERAR) {
             preencherFormulario();
@@ -175,19 +174,24 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
-    private void atualizar(){
+    private void atualizar() {
         planoDeSaude.setOperadora(textNomeDaOperadora.getText());
         planoDeSaude.setTipoDoPlano(textTipoDoPlano.getText());
-        PlanoDeSaudeDAO.atualizar(planoDeSaude);
-        JOptionPane.showMessageDialog(
-                null, 
-                "Plano de saúde atualizado com sucesso!",
-                "Plano de saúde",
-                JOptionPane.INFORMATION_MESSAGE);
-        dispose();
+
+        if (validarCadastro()) {
+            PlanoDeSaudeDAO.atualizar(planoDeSaude);
+            
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Plano de saúde atualizado com sucesso!",
+                    "Plano de saúde",
+                    JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
+
     }
-    
-    private void gravar(){
+
+    private void gravar() {
         //criar um objeto plano de saude
         PlanoDeSaude planoDeSaude = new PlanoDeSaude();
         planoDeSaude.setOperadora(textNomeDaOperadora.getText());
@@ -203,7 +207,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
             dispose();
         }
     }
-    
+
     private boolean validarCadastro() {
         if (textNomeDaOperadora.getText().isEmpty()) {
             JOptionPane.showMessageDialog(

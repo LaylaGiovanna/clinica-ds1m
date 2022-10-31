@@ -53,4 +53,9 @@ public class Especialidade {
         return contador;
     }
 
+    public String getEspecialidadeSeparadoPorPontoEVirgula(){
+        return this.codigo + ";" + this.nome + ";" + this.descricao;
+    }
+    
+    
 }

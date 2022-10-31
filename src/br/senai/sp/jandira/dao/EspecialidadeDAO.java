@@ -1,13 +1,24 @@
 package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Especialidade;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EspecialidadeDAO {
 
     private Especialidade especialidade;
     private static ArrayList<Especialidade> especialidadeArray = new ArrayList<>();
+    private static final String ARQUIVO = "C:\\Users\\22282096\\Documents\\NetBeansProjects\\Especialidade.txt";
+    private static final Path PATH = Paths.get(ARQUIVO);
 
     public EspecialidadeDAO(Especialidade especialidade) {
         this.especialidadeArray.add(especialidade);
@@ -19,6 +30,26 @@ public class EspecialidadeDAO {
 
     public static void gravar(Especialidade especialidade) {
         especialidadeArray.add(especialidade);
+
+        try {
+            //Gravar a especialidade no arquivo Especialidade.txt
+            BufferedWriter bw = Files.newBufferedWriter(
+                    PATH,
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.WRITE);
+
+            bw.write(especialidade.getEspecialidadeSeparadoPorPontoEVirgula());
+            bw.newLine();
+            bw.close();
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Ocorreu um erro ao gravar. \n\n Entre em contato com o suporte",
+                    "Erro ao gravar",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     public static boolean excluir(Integer codigo) {

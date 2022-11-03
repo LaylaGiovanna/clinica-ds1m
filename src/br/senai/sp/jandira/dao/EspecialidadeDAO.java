@@ -1,7 +1,9 @@
 package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Especialidade;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,8 +19,10 @@ public class EspecialidadeDAO {
 
     private Especialidade especialidade;
     private static ArrayList<Especialidade> especialidadeArray = new ArrayList<>();
-    private static final String ARQUIVO = "C:\\Users\\22282096\\Documents\\NetBeansProjects\\Especialidade.txt";
+    private static final String ARQUIVO = "C:\\Users\\22282096\\Documents\\especialidade.txt";
     private static final Path PATH = Paths.get(ARQUIVO);
+    private static final String ARQUIVO_TEMP = "C:\\Users\\22282096\\Documents\\especialidade_temp.txt";
+    private static final Path PATH_TEMP = Paths.get(ARQUIVO_TEMP);
 
     public EspecialidadeDAO(Especialidade especialidade) {
         this.especialidadeArray.add(especialidade);
@@ -56,10 +60,52 @@ public class EspecialidadeDAO {
         for (Especialidade e : especialidadeArray) {
             if (e.getCodigo().equals(codigo)) {
                 especialidadeArray.remove(e);
-                return true;
+                break;
             }
         }
+
+        atualizarArquivo();
+
         return false;
+    }
+
+    public static void atualizarArquivo() {
+        //Reconstruir um arquivo atualizado, ou seja,
+        //sem o plano que foi removido
+
+        //PASSO 1 criar uma representação dos arquivos que serão manipulados
+        File arquivoAtual = new File(ARQUIVO);
+        File arquivoTemp = new File(ARQUIVO_TEMP);
+
+        try {
+            arquivoTemp.createNewFile();
+
+            BufferedWriter bwTemp = Files.newBufferedWriter(
+                    PATH_TEMP,
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.WRITE);
+
+            for (Especialidade p : especialidadeArray) {
+                bwTemp.write(p.getEspecialidadeSeparadoPorPontoEVirgula());
+                bwTemp.newLine();
+            }
+
+            //Fechar o arquivo temporário
+            bwTemp.close();
+
+            //Excluir o arquivo atual - plano_de_saude.txt
+            arquivoAtual.delete();
+
+            //Renomear o arquivo temporário
+            arquivoTemp.renameTo(arquivoAtual);
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Houve um erro ao criar o arquivo!!",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static Especialidade getEspecialidade(Integer codigo) {
@@ -86,16 +132,36 @@ public class EspecialidadeDAO {
         return especialidadeArray;
     }
 
-    public static void criarEspecialidadeTeste() {
-        //"Banco de dados"
-        Especialidade e1 = new Especialidade("Cardiologia: ", "Especialidade que trabalha no diagnóstico e tratamento de doenças do coração e sistema circulatório.");
-        Especialidade e2 = new Especialidade("Infectologia", "Estudo de doenças provocadas por patógenos como bactérias, vírus, fungos, protozoários, príons e zoonoses.");
-        Especialidade e3 = new Especialidade("Nefrologia", "Destinada ao diagnóstico e tratamento clínico de doenças do aparelho urinário, em especial dos rins.");
-        Especialidade e4 = new Especialidade("Gastroenterologia", "Responsável pelo diagnóstico e tratamento de doenças do sistema digestivo.");
-        especialidadeArray.add(e1);
-        especialidadeArray.add(e2);
-        especialidadeArray.add(e3);
-        especialidadeArray.add(e4);
+    public static void getListaEspecialidade() {
+        try {
+            BufferedReader br = Files.newBufferedReader(PATH);
+
+            String linha = br.readLine();
+
+            while (linha != null && !linha.isEmpty()) {
+                String[] linhaVetor = linha.split(";");
+                Especialidade novaEspecialidade = new Especialidade(
+                        Integer.valueOf(linhaVetor[0]),
+                        linhaVetor[1],
+                        linhaVetor[2]);
+                especialidadeArray.add(novaEspecialidade);
+                linha = br.readLine();
+            }
+            br.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(EspecialidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //        //"Banco de dados"
+//        Especialidade e1 = new Especialidade("Cardiologia: ", "Especialidade que trabalha no diagnóstico e tratamento de doenças do coração e sistema circulatório.");
+//        Especialidade e2 = new Especialidade("Infectologia", "Estudo de doenças provocadas por patógenos como bactérias, vírus, fungos, protozoários, príons e zoonoses.");
+//        Especialidade e3 = new Especialidade("Nefrologia", "Destinada ao diagnóstico e tratamento clínico de doenças do aparelho urinário, em especial dos rins.");
+//        Especialidade e4 = new Especialidade("Gastroenterologia", "Responsável pelo diagnóstico e tratamento de doenças do sistema digestivo.");
+//        especialidadeArray.add(e1);
+//        especialidadeArray.add(e2);
+//        especialidadeArray.add(e3);
+//        especialidadeArray.add(e4);
     }
 
     public static DefaultTableModel getTableModel() {

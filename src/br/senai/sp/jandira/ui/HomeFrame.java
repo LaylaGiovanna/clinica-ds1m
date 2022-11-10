@@ -8,6 +8,7 @@ public class HomeFrame extends javax.swing.JFrame {
 
     private PlanosDeSaudePanel planosDeSaudePanel;
     private EspecialidadePanel especialidadePanel;
+//    private MedicoPanel medicoPanel;
 
     private final int POSICAO_X = 10;
     private final int POSICAO_Y = 180;
@@ -230,7 +231,14 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonEspecialidadesActionPerformed
 
     private void buttonMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMedicosActionPerformed
-        //buttonMedicos.setBackground(new java.awt.Color(195, 161, 251));
+        
+        buttonMedicos.setBackground(new java.awt.Color(195, 161, 251));
+        buttonHome.setBackground(new java.awt.Color(255, 255, 255));
+        buttonPlanosDeSaude.setBackground(new java.awt.Color(255, 255, 255));
+        buttonEspecialidades.setBackground(new java.awt.Color(255, 255, 255));
+        
+        
+        
     }//GEN-LAST:event_buttonMedicosActionPerformed
 
     private void buttonPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPacientesActionPerformed

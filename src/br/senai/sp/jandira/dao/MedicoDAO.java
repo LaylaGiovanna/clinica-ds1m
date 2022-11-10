@@ -1,6 +1,6 @@
 package br.senai.sp.jandira.dao;
 
-import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.model.Medico;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,30 +10,28 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class EspecialidadeDAO {
+public class MedicoDAO {
 
-    private Especialidade especialidade;
-    private static ArrayList<Especialidade> especialidadeArray = new ArrayList<>();
-    private static final String ARQUIVO = "C:\\Users\\22282096\\Documents\\NetBeansProjects\\especialidade.txt";
+    private Medico medico;
+    private static ArrayList<Medico> medicoArray = new ArrayList<>();
+    private static final String ARQUIVO = "C:\\Users\\22282096\\Documents\\NetBeansProjects\\medico.txt";
     private static final Path PATH = Paths.get(ARQUIVO);
-    private static final String ARQUIVO_TEMP = "C:\\Users\\22282096\\Documents\\NetBeansProjects\\especialidade_temp.txt";
+    private static final String ARQUIVO_TEMP = "C:\\Users\\22282096\\Documents\\NetBeansProjects\\medico_temp.txt";
     private static final Path PATH_TEMP = Paths.get(ARQUIVO_TEMP);
 
-    public EspecialidadeDAO(Especialidade especialidade) {
-        this.especialidadeArray.add(especialidade);
-    }
-
-    public EspecialidadeDAO() {
+    public MedicoDAO() {
 
     }
 
-    public static void gravar(Especialidade especialidade) {
-        especialidadeArray.add(especialidade);
+    public MedicoDAO(Medico medico) {
+        this.medicoArray.add(medico);
+    }
+
+    public static void gravar(Medico medico) {
+        medicoArray.add(medico);
 
         try {
             //Gravar a especialidade no arquivo Especialidade.txt
@@ -42,7 +40,7 @@ public class EspecialidadeDAO {
                     StandardOpenOption.APPEND,
                     StandardOpenOption.WRITE);
 
-            bw.write(especialidade.getEspecialidadeSeparadoPorPontoEVirgula());
+            bw.write(medico.getMedicoSeparadoPorPontoEVirgula());
             bw.newLine();
             bw.close();
 
@@ -57,9 +55,9 @@ public class EspecialidadeDAO {
     }
 
     public static boolean excluir(Integer codigo) {
-        for (Especialidade e : especialidadeArray) {
-            if (e.getCodigo().equals(codigo)) {
-                especialidadeArray.remove(e);
+        for (Medico m : medicoArray) {
+            if (m.getCodigo().equals(codigo)) {
+                medicoArray.remove(m);
                 break;
             }
         }
@@ -85,8 +83,8 @@ public class EspecialidadeDAO {
                     StandardOpenOption.APPEND,
                     StandardOpenOption.WRITE);
 
-            for (Especialidade p : especialidadeArray) {
-                bwTemp.write(p.getEspecialidadeSeparadoPorPontoEVirgula());
+            for (Medico m : medicoArray) {
+                bwTemp.write(m.getMedicoSeparadoPorPontoEVirgula());
                 bwTemp.newLine();
             }
 
@@ -108,31 +106,31 @@ public class EspecialidadeDAO {
         }
     }
 
-    public static Especialidade getEspecialidade(Integer codigo) {
-        for (Especialidade e : especialidadeArray) {
-            if (e.getCodigo().equals(codigo)) {
-                return e;
+    public static Medico getMedico(Integer codigo) {
+        for (Medico m : medicoArray) {
+            if (m.getCodigo().equals(codigo)) {
+                return m;
             }
         }
         return null;
     }
 
-    public static void atualizar(Especialidade especialidade) {
-        for (Especialidade e : especialidadeArray) {
-            if (e.getCodigo().equals(especialidade.getCodigo())) {
-                especialidadeArray.set(especialidadeArray.indexOf(e), especialidade);
+    public static void atualizar(Medico medico) {
+        for (Medico m : medicoArray) {
+            if (m.getCodigo().equals(medico.getCodigo())) {
+                medicoArray.set(medicoArray.indexOf(m), medico);
                 break;
             }
 
         }
+    }
+
+    public static ArrayList<Medico> listarTodos() {
+        return medicoArray;
 
     }
 
-    public static ArrayList<Especialidade> listarTodos() {
-        return especialidadeArray;
-    }
-
-    public static void getListaEspecialidade() {
+    public static void getListaMedico() {
         try {
             BufferedReader br = Files.newBufferedReader(PATH);
 
@@ -140,11 +138,11 @@ public class EspecialidadeDAO {
 
             while (linha != null && !linha.isEmpty()) {
                 String[] linhaVetor = linha.split(";");
-                Especialidade novaEspecialidade = new Especialidade(
+                Medico novoMedico = new Medico(
                         Integer.valueOf(linhaVetor[0]),
                         linhaVetor[1],
                         linhaVetor[2]);
-                especialidadeArray.add(novaEspecialidade);
+                medicoArray.add(novoMedico);
                 linha = br.readLine();
             }
             br.close();
@@ -152,35 +150,25 @@ public class EspecialidadeDAO {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro.", "Erro na leitura", JOptionPane.ERROR_MESSAGE);
         }
-
-        //        //"Banco de dados"
-//        Especialidade e1 = new Especialidade("Cardiologia: ", "Especialidade que trabalha no diagnóstico e tratamento de doenças do coração e sistema circulatório.");
-//        Especialidade e2 = new Especialidade("Infectologia", "Estudo de doenças provocadas por patógenos como bactérias, vírus, fungos, protozoários, príons e zoonoses.");
-//        Especialidade e3 = new Especialidade("Nefrologia", "Destinada ao diagnóstico e tratamento clínico de doenças do aparelho urinário, em especial dos rins.");
-//        Especialidade e4 = new Especialidade("Gastroenterologia", "Responsável pelo diagnóstico e tratamento de doenças do sistema digestivo.");
-//        especialidadeArray.add(e1);
-//        especialidadeArray.add(e2);
-//        especialidadeArray.add(e3);
-//        especialidadeArray.add(e4);
     }
 
     public static DefaultTableModel getTableModel() {
 
         //Matriz receberá planos de saúde
         //que serão utilizados na tabela (JTable)
-        Object[][] dados = new Object[especialidadeArray.size()][3];
+        Object[][] dados = new Object[medicoArray.size()][3];
 
         //for each, para extrair cada plano de saude do
         //arraylist planos e separar cada dado na matriz dados
         int i = 0;
-        for (Especialidade e : especialidadeArray) {
-            dados[i][0] = e.getCodigo();
-            dados[i][1] = e.getNome();
-            dados[i][2] = e.getDescricao();
+        for (Medico m : medicoArray) {
+            dados[i][0] = m.getCodigo();
+            dados[i][1] = m.getCrm();
+            dados[i][2] = m.getNome();
             i++;
         }
         //definir um vetor com os nome das da tabela
-        String[] titulos = {"Código", "Nome da especialidade", "Descrição"};
+        String[] titulos = {"Código", "Nome do médico", "CRM"};
 
         // Criar o modelo que será utilizado pelo JTable
         //para exibir os dados dos planos
@@ -189,4 +177,5 @@ public class EspecialidadeDAO {
         return tableModel;
 
     }
+
 }

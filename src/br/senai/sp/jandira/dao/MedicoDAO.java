@@ -168,7 +168,7 @@ public class MedicoDAO {
             i++;
         }
         //definir um vetor com os nome das da tabela
-        String[] titulos = {"Código", "Nome do médico", "CRM"};
+        String[] titulos = {"Código", "CRM", "Nome do médico"};
 
         // Criar o modelo que será utilizado pelo JTable
         //para exibir os dados dos planos

@@ -52,6 +52,7 @@ public class PlanosDeSaudePanel extends javax.swing.JPanel {
         add(scrollTablePlanosDeSaude);
         scrollTablePlanosDeSaude.setBounds(20, 40, 905, 240);
 
+        buttonExcluirPlanoDeSaude.setBackground(new java.awt.Color(254, 254, 254));
         buttonExcluirPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/delete.png"))); // NOI18N
         buttonExcluirPlanoDeSaude.setToolTipText("Excluir plano de saúde selecionado");
         buttonExcluirPlanoDeSaude.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +63,7 @@ public class PlanosDeSaudePanel extends javax.swing.JPanel {
         add(buttonExcluirPlanoDeSaude);
         buttonExcluirPlanoDeSaude.setBounds(700, 294, 70, 60);
 
+        buttonAlterarPlanoDeSaude.setBackground(new java.awt.Color(254, 254, 254));
         buttonAlterarPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/edit32.png"))); // NOI18N
         buttonAlterarPlanoDeSaude.setToolTipText("Editar plano de saúde selecionado");
         buttonAlterarPlanoDeSaude.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +74,7 @@ public class PlanosDeSaudePanel extends javax.swing.JPanel {
         add(buttonAlterarPlanoDeSaude);
         buttonAlterarPlanoDeSaude.setBounds(780, 294, 70, 60);
 
+        buttonAdicionarPlanoDeSaude.setBackground(new java.awt.Color(254, 254, 254));
         buttonAdicionarPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/menu.png"))); // NOI18N
         buttonAdicionarPlanoDeSaude.setToolTipText("Adicionar plano de saúde");
         buttonAdicionarPlanoDeSaude.addActionListener(new java.awt.event.ActionListener() {

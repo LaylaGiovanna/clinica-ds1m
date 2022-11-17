@@ -108,6 +108,7 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
         panelPrincipal.add(labelNomeDaEspecialidade);
         labelNomeDaEspecialidade.setBounds(20, 143, 161, 20);
 
+        buttonSalvar.setBackground(new java.awt.Color(254, 254, 254));
         buttonSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         buttonSalvar.setForeground(new java.awt.Color(255, 255, 255));
         buttonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/floppy-disk.png"))); // NOI18N
@@ -121,6 +122,7 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
         panelPrincipal.add(buttonSalvar);
         buttonSalvar.setBounds(530, 290, 90, 60);
 
+        buttonCancelar.setBackground(new java.awt.Color(254, 254, 254));
         buttonCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         buttonCancelar.setForeground(new java.awt.Color(255, 255, 255));
         buttonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/cancelar.png"))); // NOI18N

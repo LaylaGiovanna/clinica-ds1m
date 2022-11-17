@@ -42,6 +42,7 @@ public class EspecialidadePanel extends javax.swing.JPanel {
         jPanel.add(labelEspecialidade);
         labelEspecialidade.setBounds(20, 10, 180, 20);
 
+        buttonExcluirEspecialidade.setBackground(new java.awt.Color(254, 254, 254));
         buttonExcluirEspecialidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/delete.png"))); // NOI18N
         buttonExcluirEspecialidade.setToolTipText("Excluir plano de saúde selecionado");
         buttonExcluirEspecialidade.addActionListener(new java.awt.event.ActionListener() {
@@ -52,6 +53,7 @@ public class EspecialidadePanel extends javax.swing.JPanel {
         jPanel.add(buttonExcluirEspecialidade);
         buttonExcluirEspecialidade.setBounds(700, 294, 70, 60);
 
+        buttonAlterarEspecialidade.setBackground(new java.awt.Color(254, 254, 254));
         buttonAlterarEspecialidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/edit32.png"))); // NOI18N
         buttonAlterarEspecialidade.setToolTipText("Editar plano de saúde selecionado");
         buttonAlterarEspecialidade.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +64,7 @@ public class EspecialidadePanel extends javax.swing.JPanel {
         jPanel.add(buttonAlterarEspecialidade);
         buttonAlterarEspecialidade.setBounds(780, 294, 70, 60);
 
+        buttonAdicionarEspecialidade.setBackground(new java.awt.Color(254, 254, 254));
         buttonAdicionarEspecialidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/menu.png"))); // NOI18N
         buttonAdicionarEspecialidade.setToolTipText("Adicionar plano de saúde");
         buttonAdicionarEspecialidade.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +209,7 @@ public class EspecialidadePanel extends javax.swing.JPanel {
 
         tableEspecialidade.getColumnModel().getColumn(0).setPreferredWidth(100);
         tableEspecialidade.getColumnModel().getColumn(1).setPreferredWidth(250);
-        tableEspecialidade.getColumnModel().getColumn(2).setPreferredWidth(480);
+        tableEspecialidade.getColumnModel().getColumn(2).setPreferredWidth(557);
         tableEspecialidade.setRowHeight(ALTURA);
 
         //Impedir/bloquear a movimentação das colunas

@@ -108,7 +108,7 @@ public class MedicoPanel extends javax.swing.JPanel {
 
     private void buttonExcluirMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirMedicoActionPerformed
         //obtemos o índice da linha selecionada na tabela
-        int linha = tableMedico.getSelectedRow();
+        linha = tableMedico.getSelectedRow();
 
         //verificamos se a linha selecionada na tabela
         //-1 siginifica que o usuário não selecionou nada
@@ -185,6 +185,7 @@ public class MedicoPanel extends javax.swing.JPanel {
         String codigoStr = tableMedico.getValueAt(linha, 0).toString();
         return Integer.valueOf(codigoStr);
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionarMedico;

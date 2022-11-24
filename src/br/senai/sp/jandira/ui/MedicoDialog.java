@@ -3,12 +3,22 @@ package br.senai.sp.jandira.ui;
 import br.senai.sp.jandira.dao.MedicoDAO;
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.TipoOperacao;
+import java.awt.List;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.synth.Region;
 
 public class MedicoDialog extends javax.swing.JDialog {
 
     private TipoOperacao tipoOperacao;
     private Medico medico;
+
+    private DefaultListModel<String> listaTodosModel = new DefaultListModel<>();
+    private ArrayList<String> especialidadesArray = new ArrayList<>();
+
+    private DefaultListModel<String> selecionadosModel = new DefaultListModel<>();
+    private ArrayList<String> especialidadesSelecionadasArray = new ArrayList<>();
 
     public MedicoDialog(
             java.awt.Frame parent,
@@ -18,6 +28,7 @@ public class MedicoDialog extends javax.swing.JDialog {
 
         super(parent, modal);
         initComponents();
+        carregarEspecialidades();
         this.tipoOperacao = tipoOperacao;
         this.medico = medico;
 
@@ -28,6 +39,19 @@ public class MedicoDialog extends javax.swing.JDialog {
 
     }
 
+    private void carregarEspecialidades() {
+        especialidadesArray.add("100 - Cotia");
+        especialidadesArray.add("200 - Itapevi");
+        especialidadesArray.add("300 - São Roque");
+        especialidadesArray.add("400 - Osasco");
+        especialidadesArray.add("500 - Barueri");
+        especialidadesArray.add("600 - Carapicuíba");
+        especialidadesArray.add("700 - Santana de Parnaíba");
+
+        listaTodosModel.addAll(especialidadesArray);
+        listListaDeEspecialidades.setModel(listaTodosModel);
+    }
+
     private void preencherFormulario() {
         labelTitulo.setText("Médico - " + tipoOperacao);
         labelIcone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/imagens/edit32.png")));
@@ -36,8 +60,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         textNomeDoMedico.setText(medico.getNome());
         textTelefone.setText(medico.getTelefone());
         textEmail.setText(medico.getEmail());
-        textDataDeNascimento.setText(medico.getDataDeNascimento().toString());
-        
+//        textDataDeNascimento.setText(medico.getDataDeNascimento().toString());
     }
 
     @SuppressWarnings("unchecked")
@@ -169,7 +192,6 @@ public class MedicoDialog extends javax.swing.JDialog {
         panelPrincipal.add(textNomeDoMedico);
         textNomeDoMedico.setBounds(430, 100, 440, 30);
 
-        textTelefone.setEditable(false);
         textTelefone.setBackground(new java.awt.Color(204, 204, 255));
         textTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +201,6 @@ public class MedicoDialog extends javax.swing.JDialog {
         panelPrincipal.add(textTelefone);
         textTelefone.setBounds(20, 190, 180, 30);
 
-        textEmail.setEditable(false);
         textEmail.setBackground(new java.awt.Color(204, 204, 255));
         textEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +210,6 @@ public class MedicoDialog extends javax.swing.JDialog {
         panelPrincipal.add(textEmail);
         textEmail.setBounds(220, 190, 380, 30);
 
-        textDataDeNascimento.setEditable(false);
         textDataDeNascimento.setBackground(new java.awt.Color(204, 204, 255));
         textDataDeNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,96 +307,6 @@ public class MedicoDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
-    private void atualizar() {
-        medico.setNome(textCrm.getText());
-        medico.setCrm(textNomeDoMedico.getText());
-
-        if (validarCadastro()) {
-            MedicoDAO.atualizar(medico);
-
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Médico atualizado com sucesso!",
-                    "Médico",
-                    JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        }
-
-    }
-
-    private void gravar() {
-        //criar um objeto plano de saude
-        Medico medico = new Medico();
-        medico.setCrm(textNomeDoMedico.getText());
-        medico.setNome(textCrm.getText());
-
-        if (validarCadastro()) {
-            MedicoDAO.gravar(medico);
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Médico gravado com sucesso",
-                    "Médico",
-                    JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        }
-    }
-
-    private boolean validarCadastro() {
-        if (textCrm.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Por favor, preencha o CRM do médico!!",
-                    "Médico",
-                    JOptionPane.ERROR_MESSAGE);
-
-            textCrm.requestFocus();
-            return false;
-        }
-         if (textNomeDoMedico.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Por favor, preencha o nome do médico!!",
-                    "Médico",
-                    JOptionPane.ERROR_MESSAGE);
-
-            textNomeDoMedico.requestFocus();
-            return false;
-        }
-         
-        if(textTelefone.getText().isEmpty()){
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Por favor, preencha o número de telefone!!",
-                    "Médico",
-                    JOptionPane.ERROR_MESSAGE);
-
-            textTelefone.requestFocus();
-            return false;
-        }
-        if(textEmail.getText().isEmpty()){
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Por favor, preencha o email!!",
-                    "Médico",
-                    JOptionPane.ERROR_MESSAGE);
-
-            textEmail.requestFocus();
-            return false;
-        }
-        if(textDataDeNascimento.getText().isEmpty()){
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Por favor, preencha a data de nascimento!!",
-                    "Médico",
-                    JOptionPane.ERROR_MESSAGE);
-
-            textDataDeNascimento.requestFocus();
-            return false;
-        }
-        return true;
-    }
-
-
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
 
     }//GEN-LAST:event_buttonCancelarActionPerformed
@@ -406,9 +336,111 @@ public class MedicoDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonEsquerdaActionPerformed
 
     private void buttonDireitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDireitaActionPerformed
-        // TODO add your handling code here:
+        //String cidade = ListListaDeEspecialidades.getSelectedValue(); Pega somente um, o primeiro
+        //Object[] cidades = ListListaDeEspecialidades.getSelectedValues(); Depreciado
+        List<String> especialidadesArray = listListaDeEspecialidades.getSelectedValuesList(); // Usar esse aqui
+        
+        for (String especialidade : especialidadesArray){
+            especialidadesSelecionadasArray.add(especialidade);
+        }
+        selecionadosModel.clear();
+        selecionadosModel.addAll(especialidadesSelecionadasArray);
+        listEspecialidadeDoMedico.setModel(selecionadosModel);
     }//GEN-LAST:event_buttonDireitaActionPerformed
 
+    private void atualizar() {
+        medico.setCrm(textCrm.getText());
+        medico.setNome(textNomeDoMedico.getText());
+        
+
+        if (validarCadastro()) {
+            MedicoDAO.atualizar(medico);
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Médico atualizado com sucesso!",
+                    "Médico",
+                    JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
+
+    }
+
+    private void gravar() {
+        //criar um objeto plano de saude
+        Medico medico = new Medico();
+        medico.setCrm(textCrm.getText());
+        medico.setNome(textNomeDoMedico.getText());
+        medico.setTelefone(textTelefone.getText());
+        medico.setEmail(textEmail.getText());
+//      medico.setDataDeNascimento(textDataDeNascimento.getText());
+
+        if (validarCadastro()) {
+            MedicoDAO.gravar(medico);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Médico gravado com sucesso",
+                    "Médico",
+                    JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
+    }
+
+    private boolean validarCadastro() {
+        if (textCrm.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, preencha o CRM do médico!!",
+                    "Médico",
+                    JOptionPane.ERROR_MESSAGE);
+
+            textCrm.requestFocus();
+            return false;
+        }
+        if (textNomeDoMedico.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, preencha o nome do médico!!",
+                    "Médico",
+                    JOptionPane.ERROR_MESSAGE);
+
+            textNomeDoMedico.requestFocus();
+            return false;
+        }
+
+        if (textTelefone.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, preencha o número de telefone!!",
+                    "Médico",
+                    JOptionPane.ERROR_MESSAGE);
+
+            textTelefone.requestFocus();
+            return false;
+        }
+        if (textEmail.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, preencha o email!!",
+                    "Médico",
+                    JOptionPane.ERROR_MESSAGE);
+
+            textEmail.requestFocus();
+            return false;
+        }
+        if (textDataDeNascimento.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, preencha a data de nascimento!!",
+                    "Médico",
+                    JOptionPane.ERROR_MESSAGE);
+
+            textDataDeNascimento.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelar;

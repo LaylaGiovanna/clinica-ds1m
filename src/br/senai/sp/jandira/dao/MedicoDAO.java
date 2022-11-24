@@ -17,6 +17,7 @@ public class MedicoDAO {
 
     private Medico medico;
     private static ArrayList<Medico> medicoArray = new ArrayList<>();
+    
     private static final String ARQUIVO = "C:\\Users\\22282096\\Documents\\NetBeansProjects\\medico.txt";
     private static final Path PATH = Paths.get(ARQUIVO);
     private static final String ARQUIVO_TEMP = "C:\\Users\\22282096\\Documents\\NetBeansProjects\\medico_temp.txt";
@@ -40,7 +41,7 @@ public class MedicoDAO {
                     StandardOpenOption.APPEND,
                     StandardOpenOption.WRITE);
 
-            bw.write(medico.getMedicoSeparadoPorPontoEVirgula());
+            bw.write(medico.getCodigo()+ ";" + medico.getNome() + ";" + medico.getCrm() + ";" + medico.getTelefone() + ";" + medico.getEmail() + ";" + medico.getDataDeNascimento());
             bw.newLine();
             bw.close();
 
@@ -119,7 +120,7 @@ public class MedicoDAO {
         for (Medico m : medicoArray) {
             if (m.getCodigo().equals(medico.getCodigo())) {
                 medicoArray.set(medicoArray.indexOf(m), medico);
-                break;
+//                break;
             }
 
         }

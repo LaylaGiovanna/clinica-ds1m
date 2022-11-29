@@ -33,6 +33,17 @@ public class Medico extends Pessoa {
         setNome(nome);
         this.contador = this.codigo++;
     }
+    
+    public Medico(int codigo, String crm, String nome, String telefone, String email, LocalDate dataNascimento, ArrayList especialidades) {
+        this.codigo = codigo;
+        this.crm = crm;
+        setNome(nome);
+        setTelefone(telefone);
+        setEmail(email);
+        setDataDeNascimento(dataNascimento);
+        this.especialidades = especialidades;
+        this.contador = this.codigo;
+    }
 
     private void atualizarCodigo() {
         contador++;

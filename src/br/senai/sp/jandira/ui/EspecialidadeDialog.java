@@ -233,7 +233,7 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
 
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-
+        dispose();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void textCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCodigoActionPerformed

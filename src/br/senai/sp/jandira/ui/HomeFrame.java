@@ -267,7 +267,7 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAgendaActionPerformed
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
-        //buttonSair.setBackground(new java.awt.Color(195, 161, 251));
+       dispose();
     }//GEN-LAST:event_buttonSairActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

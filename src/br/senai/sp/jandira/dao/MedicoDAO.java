@@ -30,6 +30,7 @@ public class MedicoDAO {
     public MedicoDAO(Medico medico) {
         this.medicoArray.add(medico);
     }
+    
 
     public static void gravar(Medico medico) {
         medicoArray.add(medico);
@@ -52,7 +53,7 @@ public class MedicoDAO {
                     "Erro ao gravar",
                     JOptionPane.ERROR_MESSAGE);
         }
-
+        medicoArray.add(medico);
     }
 
     public static boolean excluir(Integer codigo) {
@@ -120,7 +121,7 @@ public class MedicoDAO {
         for (Medico m : medicoArray) {
             if (m.getCodigo().equals(medico.getCodigo())) {
                 medicoArray.set(medicoArray.indexOf(m), medico);
-//                break;
+                break;
             }
 
         }
@@ -164,8 +165,8 @@ public class MedicoDAO {
         int i = 0;
         for (Medico m : medicoArray) {
             dados[i][0] = m.getCodigo();
-            dados[i][1] = m.getCrm();
-            dados[i][2] = m.getNome();
+            dados[i][1] = m.getNome();
+            dados[i][2] = m.getCrm();
             i++;
         }
         //definir um vetor com os nome das da tabela

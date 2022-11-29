@@ -7,7 +7,6 @@ import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.synth.Region;
 
 public class MedicoDialog extends javax.swing.JDialog {
 
@@ -40,13 +39,13 @@ public class MedicoDialog extends javax.swing.JDialog {
     }
 
     private void carregarEspecialidades() {
-        especialidadesArray.add("100 - Cotia");
-        especialidadesArray.add("200 - Itapevi");
-        especialidadesArray.add("300 - São Roque");
-        especialidadesArray.add("400 - Osasco");
-        especialidadesArray.add("500 - Barueri");
-        especialidadesArray.add("600 - Carapicuíba");
-        especialidadesArray.add("700 - Santana de Parnaíba");
+        especialidadesArray.add("100 - Odontologia ");
+        especialidadesArray.add("200 - Ortopedia");
+        especialidadesArray.add("300 - Dermatologia");
+        especialidadesArray.add("400 - Pediatria");
+        especialidadesArray.add("500 - Psicologia");
+        especialidadesArray.add("600 - Fisioterapia");
+        especialidadesArray.add("700 - Oncologista");
 
         listaTodosModel.addAll(especialidadesArray);
         listListaDeEspecialidades.setModel(listaTodosModel);
@@ -60,7 +59,6 @@ public class MedicoDialog extends javax.swing.JDialog {
         textNomeDoMedico.setText(medico.getNome());
         textTelefone.setText(medico.getTelefone());
         textEmail.setText(medico.getEmail());
-//        textDataDeNascimento.setText(medico.getDataDeNascimento().toString());
     }
 
     @SuppressWarnings("unchecked")
@@ -137,7 +135,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         labelNomeDoMedico.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         labelNomeDoMedico.setText("Nome do médico:");
         panelPrincipal.add(labelNomeDoMedico);
-        labelNomeDoMedico.setBounds(430, 70, 140, 20);
+        labelNomeDoMedico.setBounds(440, 70, 140, 20);
 
         labelTelefone.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         labelTelefone.setText("Telefone:");
@@ -181,7 +179,7 @@ public class MedicoDialog extends javax.swing.JDialog {
             }
         });
         panelPrincipal.add(textCrm);
-        textCrm.setBounds(180, 100, 230, 30);
+        textCrm.setBounds(440, 100, 430, 30);
 
         textNomeDoMedico.setBackground(new java.awt.Color(204, 204, 255));
         textNomeDoMedico.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +188,7 @@ public class MedicoDialog extends javax.swing.JDialog {
             }
         });
         panelPrincipal.add(textNomeDoMedico);
-        textNomeDoMedico.setBounds(430, 100, 440, 30);
+        textNomeDoMedico.setBounds(180, 100, 240, 30);
 
         textTelefone.setBackground(new java.awt.Color(204, 204, 255));
         textTelefone.addActionListener(new java.awt.event.ActionListener() {
@@ -308,11 +306,11 @@ public class MedicoDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-
+        dispose();
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void textDataDeNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDataDeNascimentoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_textDataDeNascimentoActionPerformed
 
     private void textNomeDoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeDoMedicoActionPerformed
@@ -320,38 +318,39 @@ public class MedicoDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_textNomeDoMedicoActionPerformed
 
     private void textCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCodigoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_textCodigoActionPerformed
 
     private void textTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTelefoneActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_textTelefoneActionPerformed
 
     private void textEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEmailActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_textEmailActionPerformed
 
     private void buttonEsquerdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEsquerdaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_buttonEsquerdaActionPerformed
 
     private void buttonDireitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDireitaActionPerformed
         //String cidade = ListListaDeEspecialidades.getSelectedValue(); Pega somente um, o primeiro
         //Object[] cidades = ListListaDeEspecialidades.getSelectedValues(); Depreciado
-        List<String> especialidadesArray = listListaDeEspecialidades.getSelectedValuesList(); // Usar esse aqui
-        
-        for (String especialidade : especialidadesArray){
+        ArrayList<String> especialidadesArray = (ArrayList<String>) listListaDeEspecialidades.getSelectedValuesList(); // Usar esse aqui
+
+        for (String especialidade : especialidadesArray) {
             especialidadesSelecionadasArray.add(especialidade);
         }
         selecionadosModel.clear();
         selecionadosModel.addAll(especialidadesSelecionadasArray);
         listEspecialidadeDoMedico.setModel(selecionadosModel);
+
+        //IMPORTANTE foi adicionado o (ArrayList<String>) e parou de dar erro
     }//GEN-LAST:event_buttonDireitaActionPerformed
 
     private void atualizar() {
         medico.setCrm(textCrm.getText());
         medico.setNome(textNomeDoMedico.getText());
-        
 
         if (validarCadastro()) {
             MedicoDAO.atualizar(medico);
@@ -440,7 +439,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         }
         return true;
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelar;

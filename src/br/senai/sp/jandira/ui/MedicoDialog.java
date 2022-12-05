@@ -1,9 +1,12 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.MedicoDAO;
+import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.TipoOperacao;
 import java.awt.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -18,6 +21,7 @@ public class MedicoDialog extends javax.swing.JDialog {
 
     private DefaultListModel<String> selecionadosModel = new DefaultListModel<>();
     private ArrayList<String> especialidadesSelecionadasArray = new ArrayList<>();
+    private ArrayList<Especialidade> especialidadesSelecionadasMedico = new ArrayList<>();
 
     public MedicoDialog(
             java.awt.Frame parent,
@@ -179,7 +183,7 @@ public class MedicoDialog extends javax.swing.JDialog {
             }
         });
         panelPrincipal.add(textCrm);
-        textCrm.setBounds(440, 100, 430, 30);
+        textCrm.setBounds(180, 100, 240, 30);
 
         textNomeDoMedico.setBackground(new java.awt.Color(204, 204, 255));
         textNomeDoMedico.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +192,7 @@ public class MedicoDialog extends javax.swing.JDialog {
             }
         });
         panelPrincipal.add(textNomeDoMedico);
-        textNomeDoMedico.setBounds(180, 100, 240, 30);
+        textNomeDoMedico.setBounds(440, 100, 430, 30);
 
         textTelefone.setBackground(new java.awt.Color(204, 204, 255));
         textTelefone.addActionListener(new java.awt.event.ActionListener() {
@@ -351,6 +355,12 @@ public class MedicoDialog extends javax.swing.JDialog {
     private void atualizar() {
         medico.setCrm(textCrm.getText());
         medico.setNome(textNomeDoMedico.getText());
+        medico.setTelefone(textTelefone.getText());
+        medico.setEmail(textEmail.getText());
+        medico.setDataDeNascimento(LocalDate.parse(textDataDeNascimento.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        medico.setEspecialidades(especialidadesSelecionadasMedico);
+        //medico.setDataDeNascimento();
+        //colocar o vetor de especialidades
 
         if (validarCadastro()) {
             MedicoDAO.atualizar(medico);
@@ -372,7 +382,8 @@ public class MedicoDialog extends javax.swing.JDialog {
         medico.setNome(textNomeDoMedico.getText());
         medico.setTelefone(textTelefone.getText());
         medico.setEmail(textEmail.getText());
-//      medico.setDataDeNascimento(textDataDeNascimento.getText());
+        medico.setDataDeNascimento(LocalDate.parse(textDataDeNascimento.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        medico.setEspecialidades(especialidadesSelecionadasMedico);
 
         if (validarCadastro()) {
             MedicoDAO.gravar(medico);

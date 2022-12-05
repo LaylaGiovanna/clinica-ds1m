@@ -34,6 +34,7 @@ public class MedicoDAO {
 
     public static void gravar(Medico medico) {
         medicoArray.add(medico);
+        //System.out.println(medico.getCodigo());
 
         try {
             //Gravar a especialidade no arquivo Especialidade.txt
@@ -42,7 +43,7 @@ public class MedicoDAO {
                     StandardOpenOption.APPEND,
                     StandardOpenOption.WRITE);
 
-            bw.write(medico.getCodigo()+ ";" + medico.getNome() + ";" + medico.getCrm() + ";" + medico.getTelefone() + ";" + medico.getEmail() + ";" + medico.getDataDeNascimento());
+            bw.write(medico.getCodigo()+ ";" + medico.getCrm() + ";" +  medico.getNome() + ";" + medico.getTelefone() + ";" + medico.getEmail() + ";" + medico.getDataDeNascimento() + ";" + medico.getEspecialidades());
             bw.newLine();
             bw.close();
 
@@ -53,7 +54,7 @@ public class MedicoDAO {
                     "Erro ao gravar",
                     JOptionPane.ERROR_MESSAGE);
         }
-        medicoArray.add(medico);
+        //medicoArray.add(medico);
     }
 
     public static boolean excluir(Integer codigo) {
@@ -111,6 +112,9 @@ public class MedicoDAO {
     public static Medico getMedico(Integer codigo) {
         for (Medico m : medicoArray) {
             if (m.getCodigo().equals(codigo)) {
+                //System.out.println(m.getTelefone());
+                //System.out.println(m.getEmail());
+                //System.out.println(m.getTelefone());
                 return m;
             }
         }
@@ -165,8 +169,8 @@ public class MedicoDAO {
         int i = 0;
         for (Medico m : medicoArray) {
             dados[i][0] = m.getCodigo();
-            dados[i][1] = m.getNome();
-            dados[i][2] = m.getCrm();
+            dados[i][1] = m.getCrm();
+            dados[i][2] = m.getNome();
             i++;
         }
         //definir um vetor com os nome das da tabela

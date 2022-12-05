@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -187,4 +188,17 @@ public class EspecialidadeDAO {
         return tableModel;
 
     }
+    
+    public static ArrayList<String> getListaDeNomes() {
+        ArrayList<String> dados = new ArrayList<>();
+        for (Especialidade e : especialidadeArray) {
+            dados.add(e.getNome());
+        }
+        DefaultListModel<String> ListaModel = new DefaultListModel<>();
+        
+        ListaModel.addAll(dados);
+        
+        return dados;
+
+        }
 }

@@ -3,6 +3,7 @@ package br.senai.sp.jandira.model;
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 public class Medico extends Pessoa {
 
@@ -31,7 +32,7 @@ public class Medico extends Pessoa {
         this.codigo = codigo;
         this.crm = crm;
         setNome(nome);
-        this.contador = this.codigo++;
+        this.contador = this.codigo;
     }
     
     public Medico(int codigo, String crm, String nome, String telefone, String email, LocalDate dataNascimento, ArrayList especialidades) {
@@ -73,6 +74,10 @@ public class Medico extends Pessoa {
     public ArrayList<Especialidade> getEspecialidades() {
         return especialidades;
     }
+    
+    public void setEspecialidades(ArrayList<Especialidade> especialidades) {
+        this.especialidades = especialidades;
+    }
 
     public Especialidade getEspecialidade() {
         return especialidade;
@@ -88,6 +93,6 @@ public class Medico extends Pessoa {
     public String getMedicoSeparadoPorPontoEVirgula() {
 //        String MedicoStr = this.codigo + ";" + this.crm + ";" + this.nome + ";" + this.telefone + ";" + this.email + ";" + this.dataDeNascimento + ";" + this.especialidades;
 //        return MedicoStr;
-        return this.codigo + ";" + this.crm + ";" + this.getNome() + ";" + this.getTelefone() + ";" + this.getEmail() + ";" + this.getDataDeNascimento();
+        return this.codigo + ";" + this.crm + ";" + this.getNome() + ";" + this.getTelefone() + ";" + this.getEmail() + ";" + this.getDataDeNascimento() + ";" + this.getEspecialidades();
     }
 }
